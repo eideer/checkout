@@ -1,4 +1,3 @@
-import { FETCH_PRODUCT_LIST_SUCCESS } from '../actions/index';
 import reducer from './index';
 
 describe('reducer', () => {
