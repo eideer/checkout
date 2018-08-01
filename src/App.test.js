@@ -12,6 +12,6 @@ describe('render', () => {
   });
 
   it('should render an App title', () => {
-    expect(wrapper.find({ testId: 'title' })).toHaveLength(1);
+    expect(wrapper.find('[data-automation="app-title"]')).toHaveLength(1);
   });
 });
