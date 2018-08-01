@@ -14,4 +14,8 @@ describe('render', () => {
   it('should render an App title', () => {
     expect(wrapper.find('[data-automation="app-title"]')).toHaveLength(1);
   });
+
+  it('should render an App productListContainer', () => {
+    expect(wrapper.find('[data-automation="app-productListContainer"]')).toHaveLength(1);
+  });
 });
