@@ -12,6 +12,10 @@ describe('reducer', () => {
     expect(Object.keys(initialState)).toContain('products');
   });
 
+  it('should define a key for cart', () => {
+    expect(Object.keys(initialState)).toContain('cart');
+  });
+
   it('should define a key for ui', () => {
     expect(Object.keys(initialState)).toContain('ui');
   });
