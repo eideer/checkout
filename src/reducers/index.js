@@ -1,3 +1,9 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-export default combineReducers({});
+import { ui } from './ui';
+import { products } from './products';
+
+export default combineReducers({
+  products: products,
+  ui: ui,
+});
