@@ -18,4 +18,8 @@ describe('render', () => {
   it('should render an App productListContainer', () => {
     expect(wrapper.find('[data-automation="app-productListContainer"]')).toHaveLength(1);
   });
+
+  it('should render an App shoppingCartContainer', () => {
+    expect(wrapper.find('[data-automation="app-shoppingCartContainer"]')).toHaveLength(1);
+  });
 });

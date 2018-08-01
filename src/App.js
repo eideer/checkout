@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ProductListContainer from './containers/ProductListContainer';
+import ShoppingCartContainer from './containers/ShoppingCartContainer';
 
 class App extends React.Component {
   render() {
@@ -9,6 +10,8 @@ class App extends React.Component {
         <h2 data-automation='app-title'>Ads Checkout Prototype</h2>
         <hr/>
         <ProductListContainer data-automation='app-productListContainer'/>
+        <hr/>
+        <ShoppingCartContainer data-automation='app-shoppingCartContainer'/>
       </div>
     );
   }
