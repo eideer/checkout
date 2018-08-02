@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ShoppingCart from '../components/ShoppingCart';
 
 const mapStateToProps = state => ({
-  items: state.cart.items,
+  items: Obect.values(state.cart.items),
   total: 0.00,
 });
 
