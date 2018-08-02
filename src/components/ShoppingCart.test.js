@@ -6,6 +6,7 @@ import ShoppingCart from './ShoppingCart';
 const createTestProps = (attributes = {}) => ({
   items: [],
   total: 0.00,
+  ...attributes,
 });
 
 describe('render', () => {
@@ -38,6 +39,20 @@ describe('render', () => {
 
     it('should render a ShoppingCart empty message', () => {
       expect(wrapper.find('[data-automation="shoppingCart-empty-message"]')).toHaveLength(1);
+    });
+  });
+
+  describe('with items', () => {
+    let testItems;
+
+    beforeEach(() => {
+      testItems = [{id: 'just_a_test', name: 'Just a Test', price: 1.99, quantity: 1 }];
+      testProps = createTestProps({ items: testItems });
+      wrapper = Enzyme.shallow(<ShoppingCart {...testProps} />);
+    })
+
+    it('should render a ShoppingCartItem per item', () => {
+      expect(wrapper.find('[data-automation="shoppingCart-shoppingCartItem"]')).toHaveLength(testItems.length);
     });
   });
 });

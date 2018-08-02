@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import ShoppingCartItem from './ShoppingCartItem';
+
 const ShoppingCart = ({ items, total }) => (
   <div>
     <h3 data-automation='shoppingCart-title'>Your Cart</h3>
-    { items.length === 0 && (
+
+    { items.length === 0 ? (
       <div data-automation='shoppingCart-empty-message'>Please add some products to cart.</div>
+    ) : (
+      items.map(item => <ShoppingCartItem key={item.id} {...item} data-automation="shoppingCart-shoppingCartItem"/>)
     )}
     <br/>
     <div data-automation='shoppingCart-total'>
