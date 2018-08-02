@@ -44,8 +44,8 @@ describe('render', () => {
       wrapper = wrapper = Enzyme.shallow(<ProductList {...testProps} />);
     });
 
-    it('should render a ProductList product for each product', () => {
-      expect(wrapper.find('[data-automation="productList-product"]')).toHaveLength(testProducts.length);
+    it('should render a ProductList ProductContainer for each product', () => {
+      expect(wrapper.find('[data-automation="productList-productContainer"]')).toHaveLength(testProducts.length);
     });
   });
 });

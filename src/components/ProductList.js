@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Product from './Product';
+import ProductContainer from '../containers/ProductContainer';
 
 class ProductList extends React.Component {
 
@@ -21,7 +21,15 @@ class ProductList extends React.Component {
           { fetching ? (
             <div data-automation='productList-fetching'>Loading products ..</div>
           ) : (
-            products.map(product => <Product key={product.id} name={product.name} price={product.price} data-automation="productList-product"/>)
+            products.map(product => {
+              return <ProductContainer
+                       key={product.id}
+                       id={product.id}
+                       name={product.name}
+                       price={product.price}
+                       data-automation="productList-productContainer"
+                      />
+            })
           )}
         </div>
       </div>
