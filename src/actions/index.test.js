@@ -1,12 +1,14 @@
 import {
   FETCH_PRODUCT_LIST_REQUEST,
   FETCH_PRODUCT_LIST_SUCCESS,
+  ADD_TO_CART,
 } from './index';
 
 import {
   fetchProductListRequest,
   fetchProductListSuccess,
   fetchProductList,
+  addToCart,
 } from './index';
 
 describe('fetchProductListRequest', () => {
@@ -58,5 +60,19 @@ describe('fetchProductList', () => {
     expect.assertions(1);
 
     expect(dispatch.mock.calls[1][0]).toEqual(fetchProductListSuccess(products));
+  });
+});
+
+describe('addToCart', () => {
+  let expectedAction;
+  let testProduct;
+
+  beforeEach(() => {
+    testProduct = {};
+    expectedAction = { type: ADD_TO_CART, product: testProduct };
+  });
+
+  it('should create an action containing the product', () => {
+    expect(addToCart(testProduct)).toEqual(expectedAction);
   });
 });
