@@ -1,7 +1,12 @@
-import { ADD_TO_CART } from '../actions';
+import {
+  ADD_TO_CART,
+  LOGIN_SUCCESS,
+  LOGOUT
+} from '../actions';
 
 export const initialState = {
   items: {},
+  user: {},
 };
 
 export const cart = (state = initialState, action) => {
@@ -20,6 +25,12 @@ export const cart = (state = initialState, action) => {
           },
         },
       };
+
+    case LOGIN_SUCCESS:
+      return { ...state, user: { ...action.user }};
+
+    case LOGOUT:
+      return { ...state, user: {} };
 
     default:
       return state;

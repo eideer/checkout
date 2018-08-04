@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from '../actions';
+import { ADD_TO_CART, LOGIN_SUCCESS, LOGOUT } from '../actions';
 import { cart, initialState } from './cart';
 
 describe('cart', () => {
@@ -28,6 +28,7 @@ describe('cart', () => {
 
       beforeEach(() => {
         expectedState = {
+          ...initialState,
           items: {
             [testProduct.id]: {
               ...testProduct,
@@ -46,6 +47,7 @@ describe('cart', () => {
 
       beforeEach(() => {
         expectedState = {
+          ...initialState,
           items: {
             [testProduct.id]: {
               ...testProduct,
@@ -60,6 +62,38 @@ describe('cart', () => {
 
         expect(cart(state, testAction)).toEqual(expectedState);
       });
+    });
+  });
+
+  describe('with a LOGIN_SUCCESS action', () => {
+    let expectedState;
+    let testAction;
+    let user;
+
+    beforeEach(() => {
+      user = { id: 'just_a_test' };
+      testAction = { type: LOGIN_SUCCESS, user };
+      expectedState = { ...initialState, user };
+    });
+
+    it('should save the user in the cart', () => {
+      expect(cart(undefined, testAction)).toEqual(expectedState);
+    });
+  });
+
+  describe('with a LOGOUT action', () => {
+    let expectedState;
+    let testAction;
+    let testState;
+
+    beforeEach(() => {
+      testState = { ...initialState, user: { id: 'just_a_test' }};
+      testAction = { type: LOGOUT };
+      expectedState = { ...initialState, user: {}};
+    });
+
+    it('should remove the user from the cart', () => {
+      expect(cart(testState, testAction)).toEqual(expectedState);
     });
   });
 });
