@@ -1,4 +1,11 @@
-import { FETCH_PRODUCT_LIST_REQUEST, FETCH_PRODUCT_LIST_SUCCESS } from '../actions';
+import {
+  FETCH_PRODUCT_LIST_REQUEST,
+  FETCH_PRODUCT_LIST_SUCCESS,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE
+} from '../actions';
+
 import { initialState, ui } from './ui';
 
 describe('ui', () => {
@@ -24,6 +31,7 @@ describe('ui', () => {
     beforeEach(() => {
       testAction = { type: 'FETCH_PRODUCT_LIST_REQUEST'};
       expectedState = {
+        ...initialState,
         productList: {
           fetching: true,
         },
@@ -44,6 +52,7 @@ describe('ui', () => {
       testProducts = [];
       testAction = { type: FETCH_PRODUCT_LIST_SUCCESS, products: testProducts };
       expectedState = {
+        ...initialState,
         productList: {
           fetching: false,
         },
@@ -51,6 +60,69 @@ describe('ui', () => {
     });
 
     it('should handle FETCH_PRODUCT_LIST_SUCCESS', () => {
+      expect(ui(initialState, testAction)).toEqual(expectedState);
+    });
+  });
+
+  describe('with a LOGIN_REQUEST action', () => {
+    let expectedState;
+    let testAction;
+
+    beforeEach(() => {
+      expectedState = {
+        ...initialState,
+        loginForm: {
+          ...initialState.loginForm,
+          error: false,
+          submitting: true
+        }
+      };
+      testAction = { type: LOGIN_REQUEST };
+    });
+
+    it('should set loginForm submitting to true, error to false', () => {
+      expect(ui(initialState, testAction)).toEqual(expectedState);
+    });
+  });
+
+  describe('with a LOGIN_SUCCESS action', () => {
+    let expectedState;
+    let testAction;
+
+    beforeEach(() => {
+      expectedState = {
+        ...initialState,
+        loginForm: {
+          ...initialState.loginForm,
+          error: false,
+          submitting: false
+        }
+      };
+      testAction = { type: LOGIN_SUCCESS };
+    });
+
+    it('should set loginForm submitting to false, error to false', () => {
+      expect(ui(initialState, testAction)).toEqual(expectedState);
+    });
+  });
+
+  describe('with a LOGIN_FAILURE action', () => {
+    let expectedState;
+    let testAction;
+
+    beforeEach(() => {
+      expectedState = {
+        ...initialState,
+        loginForm: {
+          ...initialState.loginForm,
+          error: true,
+          submitting: false
+        }
+      };
+      testAction = { type: LOGIN_FAILURE };
+    });
+
+    it('should set loginForm submitting to false, error to true', () => {
       expect(ui(initialState, testAction)).toEqual(expectedState);
     });
   });
