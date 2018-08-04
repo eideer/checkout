@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import ShoppingCartItem from './ShoppingCartItem';
+import ShoppingCartUserContainer from '../containers/ShoppingCartUserContainer';
 
 const ShoppingCart = ({ items, total }) => (
   <div>
@@ -17,6 +18,8 @@ const ShoppingCart = ({ items, total }) => (
       <span data-automation='shoppingCart-total-label'>Total: </span>
       <span data-automation='shoppingCart-total-amount'>&#36;{total.toFixed(2)}</span>
     </div>
+    <br/>
+    <ShoppingCartUserContainer data-automation='shoppingCart-shoppingCartUserContainer' />
   </div>
 );
 

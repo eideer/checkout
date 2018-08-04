@@ -30,6 +30,10 @@ describe('render', () => {
     expect(wrapper.find('[data-automation="shoppingCart-total-amount"]').text()).toContain(testProps.total.toFixed(2));
   });
 
+  it('should render a ShoppingCartUserContainer', () => {
+    expect(wrapper.find('[data-automation="shoppingCart-shoppingCartUserContainer"]')).toHaveLength(1);
+  });
+
   describe('without any items', () => {
 
     beforeEach(() => {
