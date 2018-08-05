@@ -1,4 +1,4 @@
-import { allProducts, login } from './index';
+import * as api from './index';
 
 describe('allProducts', () => {
 
@@ -6,7 +6,16 @@ describe('allProducts', () => {
     expect.assertions(1);
 
     let expectedResults = require('./products.json');
-    return expect(allProducts()).resolves.toEqual(expectedResults);
+    return expect(api.allProducts()).resolves.toEqual(expectedResults);
+  });
+});
+
+describe('allPromotions', () => {
+  it('should resolve with an array of promotions from ./promotions.json', () => {
+    expect.assertions(1);
+
+    let expectedResults = require('./promotions.json');
+    return expect(api.allPromotions()).resolves.toEqual(expectedResults);
   });
 });
 
@@ -29,7 +38,7 @@ describe('login', () => {
     });
 
     it('should resolve with the matching user', () => {
-      return expect(login(username, password)).resolves.toEqual(user);
+      return expect(api.login(username, password)).resolves.toEqual(user);
     });
   });
 
@@ -43,7 +52,7 @@ describe('login', () => {
     });
 
     it('should reject', () => {
-      return expect(login(username, password)).rejects.toEqual();
+      return expect(api.login(username, password)).rejects.toEqual();
     });
   });
 });

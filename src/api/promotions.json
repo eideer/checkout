@@ -1,0 +1,26 @@
+[
+  {
+    "type": "multi-buy",
+    "description": "3 for 2 deal",
+    "quantity": 3,
+    "freebies": 1,
+    "userId": "Unilever",
+    "productId": "classic"
+  },
+  {
+    "type": "price-drop",
+    "price": 299.99,
+    "description": "Price drop to $299.99",
+    "quantity": 1,
+    "userId": "Apple",
+    "productId": "standout"
+  },
+  {
+    "type": "price-drop",
+    "price": 379.99,
+    "description": "Price drop to $379.99, with 4 or more purchased",
+    "quantity": 4,
+    "userId": "Nike",
+    "productId": "premium"
+  }
+]
