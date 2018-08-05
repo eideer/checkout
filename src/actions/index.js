@@ -2,6 +2,8 @@ import * as api from '../api';
 
 export const FETCH_PRODUCT_LIST_REQUEST = 'FETCH_PRODUCT_LIST_REQUEST';
 export const FETCH_PRODUCT_LIST_SUCCESS = 'FETCH_PRODUCT_LIST_SUCCESS';
+export const FETCH_PROMOTION_LIST_REQUEST = 'FETCH_PROMOTION_LIST_REQUEST';
+export const FETCH_PROMOTION_LIST_SUCCESS = 'FETCH_PROMOTION_LIST_SUCCESS';
 export const ADD_TO_CART = 'ADD_TO_CART';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -28,6 +30,29 @@ export const fetchProductList = () => {
 
     return api.allProducts().then(products => {
       dispatch(fetchProductListSuccess(products));
+    });
+  };
+};
+
+export const fetchPromotionListRequest = () => {
+  return {
+    type: FETCH_PROMOTION_LIST_REQUEST,
+  };
+};
+
+export const fetchPromotionListSuccess = (promotions) => {
+  return {
+    type: FETCH_PROMOTION_LIST_SUCCESS,
+    promotions: promotions,
+  };
+};
+
+export const fetchPromotionList = () => {
+  return (dispatch, getState) => {
+    dispatch(fetchPromotionListRequest());
+
+    return api.allPromotions().then(promotions => {
+      dispatch(fetchPromotionListSuccess(promotions));
     });
   };
 };

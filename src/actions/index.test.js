@@ -1,6 +1,8 @@
 import {
   FETCH_PRODUCT_LIST_REQUEST,
   FETCH_PRODUCT_LIST_SUCCESS,
+  FETCH_PROMOTION_LIST_REQUEST,
+  FETCH_PROMOTION_LIST_SUCCESS,
   ADD_TO_CART,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -12,6 +14,9 @@ import {
   fetchProductListRequest,
   fetchProductListSuccess,
   fetchProductList,
+  fetchPromotionListRequest,
+  fetchPromotionListSuccess,
+  fetchPromotionList,
   addToCart,
   loginRequest,
   loginSuccess,
@@ -69,6 +74,58 @@ describe('fetchProductList', () => {
     expect.assertions(1);
 
     expect(dispatch.mock.calls[1][0]).toEqual(fetchProductListSuccess(products));
+  });
+});
+
+describe('fetchPromotionListRequest', () => {
+  let expectedAction;
+
+  beforeEach(() => {
+    expectedAction = { type: FETCH_PROMOTION_LIST_REQUEST };
+  });
+
+  it('should create an action to indicate the promotion list is being fetched', () => {
+    expect(fetchPromotionListRequest()).toEqual(expectedAction);
+  });
+});
+
+describe('fetchPromotionListSuccess', () => {
+  let expectedAction;
+  let promotions;
+
+  beforeEach(() => {
+    promotions = [];
+    expectedAction = { type: FETCH_PROMOTION_LIST_SUCCESS, promotions };
+  });
+
+  it('should create an action containing the promotion list', () => {
+    expect(fetchPromotionListSuccess(promotions)).toEqual(expectedAction);
+  });
+});
+
+describe('fetchPromotionList', () => {
+  let dispatch;
+  let getState;
+  let promotions;
+
+  beforeEach(async () => {
+    dispatch = jest.fn();
+    getState = jest.fn();
+    promotions = require('../api/promotions.json');
+
+    await fetchPromotionList()(dispatch, getState);
+  });
+
+  it('should dispatch fetchPromotionListRequest', () => {
+    expect.assertions(1);
+
+    expect(dispatch.mock.calls[0][0]).toEqual(fetchPromotionListRequest());
+  });
+
+  it('should dispatch fetchPromotionListSuccess', () => {
+    expect.assertions(1);
+
+    expect(dispatch.mock.calls[1][0]).toEqual(fetchPromotionListSuccess(promotions));
   });
 });
 
