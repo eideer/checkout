@@ -4,6 +4,8 @@ import React from 'react';
 import ShoppingCart from './ShoppingCart';
 
 const createTestProps = (attributes = {}) => ({
+  fetchPromotionList: jest.fn(),
+  fetching: false,
   items: [],
   total: 0.00,
   ...attributes,
@@ -34,6 +36,18 @@ describe('render', () => {
     expect(wrapper.find('[data-automation="shoppingCart-shoppingCartUserContainer"]')).toHaveLength(1);
   });
 
+  describe('when prop fetching is true', () => {
+
+    beforeEach(() => {
+      testProps = createTestProps({ fetching: true });
+      wrapper = Enzyme.shallow(<ShoppingCart {...testProps} />);
+    });
+
+    it('should render a Shopping cart loading message', () => {
+      expect(wrapper.find('[data-automation="shoppingCart-fetching"]')).toHaveLength(1);
+    });
+  });
+
   describe('without any items', () => {
 
     beforeEach(() => {
@@ -58,5 +72,21 @@ describe('render', () => {
     it('should render a ShoppingCartItem per item', () => {
       expect(wrapper.find('[data-automation="shoppingCart-shoppingCartItem"]')).toHaveLength(testItems.length);
     });
+  });
+});
+
+describe('componentDidMount', () => {
+  let wrapper;
+  let testProps;
+
+  beforeEach(() => {
+    testProps = createTestProps();
+    wrapper = Enzyme.shallow(<ShoppingCart { ...testProps } />, { disableLifecycleMethods: true });
+
+    wrapper.instance().componentDidMount();
+  });
+
+  it('should invoke prop fetchPromotionList', () => {
+    expect(testProps.fetchPromotionList).toHaveBeenCalled();
   });
 });

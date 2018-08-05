@@ -1,6 +1,8 @@
 import {
   FETCH_PRODUCT_LIST_REQUEST,
   FETCH_PRODUCT_LIST_SUCCESS,
+  FETCH_PROMOTION_LIST_REQUEST,
+  FETCH_PROMOTION_LIST_SUCCESS,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE
@@ -123,6 +125,47 @@ describe('ui', () => {
     });
 
     it('should set loginForm submitting to false, error to true', () => {
+      expect(ui(initialState, testAction)).toEqual(expectedState);
+    });
+  });
+
+  describe('with a FETCH_PROMOTION_LIST_REQUEST action', () => {
+    let expectedState;
+    let testAction;
+
+    beforeEach(() => {
+      expectedState = {
+        ...initialState,
+        shoppingCart: {
+          ...initialState.shoppingCart,
+          fetching: true
+        }
+      };
+      testAction = { type: FETCH_PROMOTION_LIST_REQUEST };
+    });
+
+    it('should set loginForm submitting to false, error to true', () => {
+      expect(ui(initialState, testAction)).toEqual(expectedState);
+    });
+  });
+
+  describe('with a FETCH_PROMOTION_LIST_SUCCESS action', () => {
+    let expectedState;
+    let testPromotions;
+    let testAction;
+
+    beforeEach(() => {
+      testPromotions = [];
+      testAction = { type: FETCH_PROMOTION_LIST_SUCCESS, promotions: testPromotions };
+      expectedState = {
+        ...initialState,
+        shoppingCart: {
+          fetching: false,
+        },
+      };
+    });
+
+    it('should handle FETCH_PROMOTION_LIST_SUCCESS', () => {
       expect(ui(initialState, testAction)).toEqual(expectedState);
     });
   });

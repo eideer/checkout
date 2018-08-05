@@ -1,11 +1,13 @@
 import {
   ADD_TO_CART,
+  FETCH_PROMOTION_LIST_SUCCESS,
   LOGIN_SUCCESS,
   LOGOUT
 } from '../actions';
 
 export const initialState = {
   items: {},
+  promotions: [],
   user: {},
 };
 
@@ -25,6 +27,9 @@ export const cart = (state = initialState, action) => {
           },
         },
       };
+
+    case FETCH_PROMOTION_LIST_SUCCESS:
+      return { ...state, promotions: [ ...action.promotions ]};
 
     case LOGIN_SUCCESS:
       return { ...state, user: { ...action.user }};

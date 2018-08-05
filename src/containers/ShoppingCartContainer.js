@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { fetchPromotionList } from '../actions';
 import ShoppingCart from '../components/ShoppingCart';
 import * as pricing from '../helpers';
 
@@ -8,11 +9,16 @@ const mapStateToProps = state => {
   const totals = items.map(item => pricing.total(item.price, item.quantity));
 
   return {
+    fetching: state.ui.shoppingCart.fetching,
     items: items,
     total: pricing.sum(...totals),
   };
 };
 
-const ShoppingCartContainer = connect(mapStateToProps)(ShoppingCart);
+const mapDispatchToProps = (dispatch) => ({
+  fetchPromotionList: () => dispatch(fetchPromotionList()),
+});
+
+const ShoppingCartContainer = connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
 
 export default ShoppingCartContainer;

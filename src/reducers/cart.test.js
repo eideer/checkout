@@ -1,4 +1,10 @@
-import { ADD_TO_CART, LOGIN_SUCCESS, LOGOUT } from '../actions';
+import {
+  ADD_TO_CART,
+  FETCH_PROMOTION_LIST_SUCCESS,
+  LOGIN_SUCCESS,
+  LOGOUT
+} from '../actions';
+
 import { cart, initialState } from './cart';
 
 describe('cart', () => {
@@ -62,6 +68,25 @@ describe('cart', () => {
 
         expect(cart(state, testAction)).toEqual(expectedState);
       });
+    });
+  });
+
+  describe('with a FETCH_PROMOTION_LIST_SUCCESS action', () => {
+    let expectedState;
+    let testPromotions;
+    let testAction;
+
+    beforeEach(() => {
+      testPromotions = [{ type: 'just_a_test' }];
+      testAction = { type: FETCH_PROMOTION_LIST_SUCCESS, promotions: testPromotions };
+      expectedState = {
+        ...initialState,
+        promotions: testPromotions,
+      };
+    });
+
+    it('should handle FETCH_PROMOTION_LIST_SUCCESS', () => {
+      expect(cart(initialState, testAction)).toEqual(expectedState);
     });
   });
 
