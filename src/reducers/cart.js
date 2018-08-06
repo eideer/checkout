@@ -1,43 +1,11 @@
-import {
-  ADD_TO_CART,
-  FETCH_PROMOTION_LIST_SUCCESS,
-  LOGIN_SUCCESS,
-  LOGOUT
-} from '../actions';
+import { combineReducers } from 'redux';
 
-export const initialState = {
-  items: {},
-  promotions: [],
-  user: {},
-};
+import { items } from './items';
+import { promotions } from './promotions';
+import { user } from './user';
 
-export const cart = (state = initialState, action) => {
-  switch(action.type) {
-    case ADD_TO_CART:
-      const cartItem = state.items[action.product.id] || { ...action.product, quantity: 0 };
-      const quantity = cartItem.quantity + 1;
-
-      return {
-        ...state,
-        items: {
-          ...state.items,
-          [cartItem.id]: {
-            ...cartItem,
-            quantity,
-          },
-        },
-      };
-
-    case FETCH_PROMOTION_LIST_SUCCESS:
-      return { ...state, promotions: [ ...action.promotions ]};
-
-    case LOGIN_SUCCESS:
-      return { ...state, user: { ...action.user }};
-
-    case LOGOUT:
-      return { ...state, user: {} };
-
-    default:
-      return state;
-  }
-};
+export const cart = combineReducers({
+  items: items,
+  promotions: promotions,
+  user: user,
+});
