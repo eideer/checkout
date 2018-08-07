@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import ShoppingCartItem from './ShoppingCartItem';
+import ShoppingCartItemListContainer from '../containers/ShoppingCartItemListContainer';
+import ShoppingCartAdjustmentListContainer from '../containers/ShoppingCartAdjustmentListContainer';
 import ShoppingCartUserContainer from '../containers/ShoppingCartUserContainer';
 
 class ShoppingCart extends React.Component {
@@ -13,7 +14,7 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { fetching, items, total } = this.props;
+    const { fetching, total } = this.props;
 
     return (
       <div>
@@ -21,12 +22,12 @@ class ShoppingCart extends React.Component {
 
         { fetching
           ? <div data-automation='shoppingCart-fetching'>Loading cart ..</div>
-          : ( items.length === 0
-              ? <div data-automation='shoppingCart-empty-message'>Please add some products to cart.</div>
-              : items.map(item => <ShoppingCartItem key={item.id} {...item} data-automation="shoppingCart-shoppingCartItem"/>)
+          : ( <div>
+                <ShoppingCartItemListContainer data-automation="shoppingCart-shoppingCartItemListContainer"/>
+                <ShoppingCartAdjustmentListContainer data-automation="shoppingCart-shoppingCartAdjustmentListContainer"/>
+              </div>
             )
-          }
-        <br/>
+        }
         <div data-automation='shoppingCart-total'>
           <span data-automation='shoppingCart-total-label'>Total: </span>
           <span data-automation='shoppingCart-total-amount'>&#36;{total.toFixed(2)}</span>
@@ -41,7 +42,6 @@ class ShoppingCart extends React.Component {
 ShoppingCart.propTypes = {
   fetchPromotionList: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
-  items: PropTypes.array.isRequired,
   total: PropTypes.number.isRequired,
 };
 
