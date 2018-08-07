@@ -18,4 +18,8 @@ describe('cart', () => {
   it('should define a key for user', () => {
     expect(Object.keys(initialState)).toContain('user');
   });
+
+  it('should define a key for adjustments', () => {
+    expect(Object.keys(initialState)).toContain('adjustments');
+  });
 });
