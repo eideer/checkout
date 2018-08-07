@@ -1,5 +1,7 @@
 import { LOGIN_SUCCESS, LOGOUT } from '../actions';
 
+export const getUser = (state) => state;
+
 export const initialState = {};
 
 export const user = (state = initialState, action) => {

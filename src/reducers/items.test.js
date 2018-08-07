@@ -1,5 +1,5 @@
 import { ADD_TO_CART } from '../actions';
-import { items, initialState } from './items';
+import { getItems, items, initialState } from './items';
 
 describe('items', () => {
   describe('without a known action', () => {
@@ -53,5 +53,17 @@ describe('items', () => {
         expect(items(currentState, testAction)).toEqual(expectedState);
       });
     });
+  });
+});
+
+describe('getItems', () => {
+  let currentState;
+
+  beforeEach(() => {
+    currentState = { 'just_a_test': { id: 'just_a_test '}};
+  });
+
+  it('should return items as an array', () => {
+    expect(getItems(currentState)).toEqual(Object.values(currentState));
   });
 });

@@ -1,5 +1,5 @@
 import { LOGIN_SUCCESS, LOGOUT } from '../actions';
-import { user, initialState } from './user';
+import { getUser, user, initialState } from './user';
 
 describe('user', () => {
   describe('without a known action', () => {
@@ -44,5 +44,19 @@ describe('user', () => {
     it('should remove the user properties', () => {
       expect(user(testState, testAction)).toEqual(expectedState);
     });
+  });
+});
+
+describe('getUser', () => {
+  let currentState;
+  let testUser;
+
+  beforeEach(() => {
+    testUser = { id: 'just_a_test' };
+    currentState = testUser;
+  });
+
+  it('should return the user state', () => {
+    expect(getUser(currentState)).toEqual(testUser);
   });
 });

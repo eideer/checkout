@@ -1,5 +1,7 @@
 import { ADD_TO_CART } from '../actions';
 
+export const getItems = (state) => Object.values(state);
+
 export const initialState = {};
 
 export const items = (state = initialState, action) => {

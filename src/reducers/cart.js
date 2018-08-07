@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
+import * as itemReducer from './items';
+import * as promotionReducer from './promotions';
+import * as userReducer from './user';
 
 import { items } from './items';
 import { promotions } from './promotions';
