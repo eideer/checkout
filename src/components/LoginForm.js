@@ -39,6 +39,7 @@ class LoginForm extends React.Component {
             type="text"
             value={username}
             onChange={this.handleUsernameChange}
+            autoComplete="off"
           />
 
           <label htmlFor="password">Password:</label>
@@ -48,6 +49,7 @@ class LoginForm extends React.Component {
             type="password"
             value={password}
             onChange={this.handlePasswordChange}
+            autoComplete="off"
           />
 
           <input
